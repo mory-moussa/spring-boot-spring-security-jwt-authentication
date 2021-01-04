@@ -1,5 +1,6 @@
 package com.telemedine.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,10 +12,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "adresse")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Adresse {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +52,11 @@ public class Adresse {
 	 @OneToOne(fetch = FetchType.LAZY, optional = false)
 	   @JoinColumn(name = "hopital_id", nullable = false)
 	   private Hopital hopital;
-	*/
+	
+	 @OneToOne(mappedBy = "adresse")
+	    private User user;
+	 @OneToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "hopital_id", referencedColumnName = "id")
+	    private Hopital hopital;*/
 	
 }

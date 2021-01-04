@@ -2,10 +2,10 @@ package com.telemedine.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -24,7 +24,10 @@ public class Hopital {
 	@NotBlank
 	@Size(max = 20)
 	private String name;
-	
+	 @OneToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "medecin_id", referencedColumnName = "id")
+	    private Medecin medecin;
+	private Long idAdresse;
 	/* @OneToOne(fetch = FetchType.LAZY,
 	            cascade =  CascadeType.ALL,
 	            mappedBy = "adresse")

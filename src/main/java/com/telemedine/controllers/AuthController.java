@@ -89,11 +89,13 @@ public class AuthController {
 		}
 
 		// Create new user's account
-		User user = new User(signUpRequest.getEmail(),
-							 signUpRequest.getFullname(),
-				             signUpRequest.getPhone(),
-				            signUpRequest.getPhoto(),
-							 encoder.encode(signUpRequest.getPassword()));
+		User user = new User();
+		user.setEmail(signUpRequest.getEmail());
+		user.setFullname(signUpRequest.getFullname());
+		user.setPhone(signUpRequest.getPhone());
+		user.setPhoto(signUpRequest.getPhoto());
+		user.setPassword(encoder.encode(signUpRequest.getPassword()));
+       
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();

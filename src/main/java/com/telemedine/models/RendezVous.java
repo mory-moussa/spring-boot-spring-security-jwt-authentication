@@ -2,13 +2,16 @@ package com.telemedine.models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
-
+@Entity
+@Table(name = "rendezVous")
 public class RendezVous {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +27,6 @@ public class RendezVous {
 	private Date dateFin;
 	@NotNull
 	private boolean isvalid;
+	private Long idMedecin;
 
 }

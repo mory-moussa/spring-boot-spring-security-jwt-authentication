@@ -1,5 +1,6 @@
 package com.telemedine.models;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,12 +9,21 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.sun.istack.Nullable;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(	name = "users", 
 		uniqueConstraints = { 
 			@UniqueConstraint(columnNames = "phone"),
 			@UniqueConstraint(columnNames = "email") 
 		})
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class User {
 	@Id
@@ -33,74 +43,30 @@ public class User {
 	@Size(max = 50)
 	@Email
 	private String email;
-
+	@Nullable
+	private String paypalEmail;
+	private Instant created;
+	private boolean enabled;
 	@NotBlank
 	@Size(max = 120)
 	private String password;
 	
-	/* @OneToOne(fetch = FetchType.LAZY,
-	            cascade =  CascadeType.ALL,
-	            mappedBy = "adresse")
-	    private Adresse adresse;*/
+	
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+	/* @OneToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
+	    private Adresse adrsse;*/
+	 @OneToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+	    private Patient patient;
+	 @OneToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name = "medecin_id", referencedColumnName = "id")
+	    private Medecin medecin;
 
-	public User() {
-	}
 
-	public User(String email,String fullname, String phone ,String photo ,String password) {
-		this.fullname = fullname;
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
-		this.photo  = photo;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getFullname() { return fullname; }
-
-	public void setFullname(String fullname) { this.fullname = fullname; }
-
-	public String getPhone() { return phone; }
-
-	public void setPhone(String phone) { this.phone = phone; }
-
-	public String getPhoto() { return photo; }
-
-	public void setPhoto(String photo) {this.photo = photo; }
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
 }

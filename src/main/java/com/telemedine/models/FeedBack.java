@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 
 import lombok.Data;
 
@@ -23,7 +24,6 @@ public class FeedBack {
 	
 	@NotNull
 	private int rating;
-	
 	
 
 }
