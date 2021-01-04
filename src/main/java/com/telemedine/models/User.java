@@ -1,7 +1,9 @@
 package com.telemedine.models;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.sun.istack.Nullable;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +39,7 @@ public class User {
 	@NotBlank
 	@Size(max = 10)
 	private String phone;
-	@NotBlank
+	@Nullable
 	@Size(max = 100)
 	private String photo;
 	@NotBlank
@@ -53,11 +56,11 @@ public class User {
 	
 	
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "user_roles", 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(	name = "user_roles",
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	private List<Role> roles = new ArrayList<>();
 	/* @OneToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
 	    private Adresse adrsse;*/

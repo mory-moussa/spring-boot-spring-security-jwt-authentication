@@ -1,8 +1,10 @@
 package com.telemedine.payload.request;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.*;
+
  
 public class SignupRequest {
     @NotBlank
@@ -22,7 +24,7 @@ public class SignupRequest {
     @Email
     private String email;
     
-    private Set<String> role;
+    private List<String> role;
     
     @NotBlank
     @Size(min = 6, max = 40)
@@ -56,11 +58,11 @@ public class SignupRequest {
         this.password = password;
     }
     
-    public Set<String> getRole() {
+    public List<String> getRole() {
       return this.role;
     }
     
-    public void setRole(Set<String> role) {
+    public void setRole(List<String> role) {
       this.role = role;
     }
 }

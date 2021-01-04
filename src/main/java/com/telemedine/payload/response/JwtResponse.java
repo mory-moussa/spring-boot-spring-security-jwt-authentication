@@ -2,6 +2,8 @@ package com.telemedine.payload.response;
 
 import java.util.List;
 
+import com.telemedine.models.Role;
+
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
@@ -10,9 +12,9 @@ public class JwtResponse {
 	private String phone;
 	private String photo;
 	private String email;
-	private List<String> roles;
+	private List<Role> roles;
 
-	public JwtResponse(String accessToken, Long id, String fullname, String email, String phone,String photo, List<String> roles) {
+	public JwtResponse(String accessToken, Long id, String fullname, String email, String phone,String photo, List<Role> roles) {
 		this.token = accessToken;
 		this.id = id;
 		this.fullname = fullname;
@@ -94,11 +96,11 @@ public class JwtResponse {
 		this.photo = photo;
 	}
 
-	public void setRoles(List<String> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
-	public List<String> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 }
